@@ -1,0 +1,206 @@
+:root {
+  --apple-black: #000000;
+  --apple-gray: #f5f5f7;
+  --apple-text: #1d1d1f;
+  --apple-text-soft: rgba(29, 29, 31, 0.8);
+  --apple-text-muted: rgba(29, 29, 31, 0.56);
+  --apple-blue: #0071e3;
+  --apple-link: #0066cc;
+  --apple-white: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.22) 3px 5px 30px 0px;
+  --pill-radius: 980px;
+  --card-radius: 18px;
+  --button-radius: 980px;
+  --focus-ring: 0 0 0 2px #0071e3;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  min-width: 368px;
+  background: var(--apple-gray);
+  color: var(--apple-text);
+  font-family: inherit;
+}
+
+button {
+  font: inherit;
+}
+
+.popup-shell {
+  display: grid;
+  gap: 12px;
+  padding: 12px;
+}
+
+.hero,
+.actions-card,
+.status-card {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.hero {
+  background: var(--apple-black);
+  color: var(--apple-white);
+  padding: 22px 20px;
+  display: grid;
+  gap: 10px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.33;
+  letter-spacing: -0.12px;
+  color: rgba(255, 255, 255, 0.72);
+  text-transform: none;
+}
+
+.hero h1 {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.2px;
+  text-wrap: balance;
+  word-break: keep-all;
+}
+
+.hero-copy {
+  margin: 0;
+  max-width: none;
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: -0.2px;
+  color: rgba(255, 255, 255, 0.86);
+  word-break: keep-all;
+}
+
+.actions-card {
+  background: var(--apple-white);
+  box-shadow: var(--card-shadow);
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.primary-button,
+.secondary-button {
+  width: 100%;
+  border: 1px solid rgba(0, 113, 227, 0.14);
+  border-radius: var(--button-radius);
+  cursor: pointer;
+  text-align: left;
+  display: grid;
+  gap: 4px;
+  padding: 14px 18px;
+  transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease, transform 140ms ease, opacity 140ms ease;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(245, 245, 247, 0.98) 100%);
+  color: var(--apple-text);
+}
+
+.button-title {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.32;
+  letter-spacing: -0.2px;
+  word-break: keep-all;
+}
+
+.button-copy {
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.12px;
+  color: var(--apple-text-soft);
+  opacity: 1;
+  word-break: keep-all;
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+  background: rgba(0, 113, 227, 0.08);
+  border-color: rgba(0, 113, 227, 0.38);
+  color: var(--apple-blue);
+  transform: translateY(-1px);
+}
+
+.primary-button:hover .button-copy,
+.secondary-button:hover .button-copy {
+  color: rgba(0, 113, 227, 0.82);
+}
+
+.primary-button:focus-visible,
+.secondary-button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.primary-button:disabled,
+.secondary-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.status-card {
+  background: var(--apple-white);
+  box-shadow: var(--card-shadow);
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.utility-card {
+  padding: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.utility-button {
+  padding: 14px 18px;
+  height: 100%;
+  align-content: start;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.status-label {
+  font-size: 11px;
+  line-height: 1.33;
+  letter-spacing: -0.12px;
+  color: var(--apple-text-muted);
+}
+
+.status-value {
+  font-size: 11px;
+  line-height: 1.33;
+  letter-spacing: -0.12px;
+  color: var(--apple-text);
+  font-weight: 600;
+  text-align: right;
+}
+
+.status-message {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  letter-spacing: -0.12px;
+  color: var(--apple-text-soft);
+  word-break: keep-all;
+}

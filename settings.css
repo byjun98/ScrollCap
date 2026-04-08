@@ -1,0 +1,295 @@
+:root {
+  --apple-black: #000000;
+  --apple-gray: #f5f5f7;
+  --apple-text: #1d1d1f;
+  --apple-text-soft: rgba(29, 29, 31, 0.8);
+  --apple-text-muted: rgba(29, 29, 31, 0.56);
+  --apple-blue: #0071e3;
+  --apple-white: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.18) 3px 5px 30px 0px;
+  --card-radius: 22px;
+  --button-radius: 980px;
+  --focus-ring: 0 0 0 2px #0071e3;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--apple-gray);
+  color: var(--apple-text);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.settings-shell {
+  width: min(880px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 40px;
+  display: grid;
+  gap: 16px;
+}
+
+.settings-hero,
+.settings-card {
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.settings-hero {
+  background: var(--apple-black);
+  color: var(--apple-white);
+  padding: 28px 28px 30px;
+  display: grid;
+  gap: 10px;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.33;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.settings-hero h1 {
+  margin: 0;
+  font-size: clamp(30px, 5vw, 40px);
+  line-height: 1.1;
+  letter-spacing: -0.24px;
+}
+
+.hero-copy {
+  margin: 0;
+  max-width: 34rem;
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.84);
+  word-break: keep-all;
+}
+
+.settings-card {
+  background: var(--apple-white);
+  box-shadow: var(--card-shadow);
+  padding: 12px;
+}
+
+.settings-form {
+  display: grid;
+  gap: 10px;
+}
+
+.shortcut-panel {
+  display: grid;
+  gap: 12px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(245, 245, 247, 0.98) 100%);
+  border: 1px solid rgba(0, 113, 227, 0.12);
+  border-radius: 18px;
+  padding: 16px 18px;
+}
+
+.shortcut-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.shortcut-list {
+  display: grid;
+  gap: 10px;
+}
+
+.shortcut-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(0, 113, 227, 0.1);
+}
+
+.shortcut-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.shortcut-label {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  word-break: keep-all;
+}
+
+.shortcut-description {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--apple-text-soft);
+  word-break: keep-all;
+}
+
+.shortcut-key {
+  flex: none;
+  min-width: 136px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(0, 113, 227, 0.08);
+  border: 1px solid rgba(0, 113, 227, 0.18);
+  color: var(--apple-blue);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(245, 245, 247, 0.98) 100%);
+  border: 1px solid rgba(0, 113, 227, 0.12);
+  border-radius: 18px;
+  padding: 16px 18px;
+}
+
+.setting-row-input {
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.setting-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.setting-title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.35;
+  word-break: keep-all;
+}
+
+.setting-description {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--apple-text-soft);
+  word-break: keep-all;
+}
+
+.setting-toggle {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--apple-blue);
+  flex: none;
+}
+
+.setting-input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid rgba(0, 113, 227, 0.18);
+  border-radius: 14px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.98);
+  color: var(--apple-text);
+}
+
+.setting-input::placeholder {
+  color: var(--apple-text-muted);
+}
+
+.settings-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 6px 2px;
+}
+
+.settings-status {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--apple-text-soft);
+}
+
+.settings-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.primary-button,
+.secondary-button {
+  min-height: 40px;
+  border-radius: var(--button-radius);
+  border: 1px solid rgba(0, 113, 227, 0.24);
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease, transform 140ms ease;
+}
+
+.primary-button {
+  background: rgba(0, 113, 227, 0.1);
+  color: var(--apple-blue);
+}
+
+.secondary-button {
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--apple-text);
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+  background: rgba(0, 113, 227, 0.08);
+  border-color: rgba(0, 113, 227, 0.38);
+  color: var(--apple-blue);
+  transform: translateY(-1px);
+}
+
+.primary-button:focus-visible,
+.secondary-button:focus-visible,
+.setting-toggle:focus-visible,
+.setting-input:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+@media (max-width: 720px) {
+  .settings-shell {
+    width: calc(100% - 24px);
+    padding-top: 20px;
+  }
+
+  .setting-row,
+  .settings-footer,
+  .shortcut-panel-header,
+  .shortcut-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .settings-actions {
+    width: 100%;
+  }
+
+  .primary-button,
+  .secondary-button,
+  .shortcut-key {
+    width: 100%;
+  }
+}

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScrollCap 설정</title>
+    <link rel="stylesheet" href="settings.css">
+  </head>
+  <body>
+    <main class="settings-shell">
+      <section class="settings-hero">
+        <p class="eyebrow">ScrollCap</p>
+        <h1>설정</h1>
+        <p class="hero-copy">내보내기 방식, 파일명 규칙, 자동 저장 동작과 단축키까지 한 번에 확인할 수 있습니다.</p>
+      </section>
+
+      <section class="settings-card">
+        <form id="settingsForm" class="settings-form">
+          <label class="setting-row" for="exportSaveAs">
+            <div class="setting-copy">
+              <span class="setting-title">저장 전에 위치와 이름 확인</span>
+              <span class="setting-description">내보낼 때마다 저장 창을 열어 직접 파일명을 정합니다.</span>
+            </div>
+            <input id="exportSaveAs" class="setting-toggle" type="checkbox">
+          </label>
+
+          <label class="setting-row" for="includeCropSizeInFilename">
+            <div class="setting-copy">
+              <span class="setting-title">파일명에 크롭 크기 포함</span>
+              <span class="setting-description">크롭해서 저장한 이미지라면 파일명 뒤에 가로x세로 크기를 붙입니다.</span>
+            </div>
+            <input id="includeCropSizeInFilename" class="setting-toggle" type="checkbox">
+          </label>
+
+          <label class="setting-row" for="suppressFixedElementsOnCapture">
+            <div class="setting-copy">
+              <span class="setting-title">캡처 전에 fixed/sticky 숨기기</span>
+              <span class="setting-description">전체 캡처와 선택 캡처 전에 상단 고정 헤더나 떠 있는 버튼을 자동으로 숨깁니다.</span>
+            </div>
+            <input id="suppressFixedElementsOnCapture" class="setting-toggle" type="checkbox">
+          </label>
+
+          <label class="setting-row setting-row-input" for="filenameTemplate">
+            <div class="setting-copy">
+              <span class="setting-title">파일 이름 형식</span>
+              <span class="setting-description">
+                사용할 수 있는 값: <code>{title}</code>, <code>{captureId}</code>, <code>{date}</code>, <code>{time}</code>,
+                <code>{host}</code>, <code>{kind}</code>, <code>{width}</code>, <code>{height}</code>
+              </span>
+            </div>
+            <input
+              id="filenameTemplate"
+              class="setting-input"
+              type="text"
+              placeholder="{captureId}"
+              spellcheck="false"
+              autocomplete="off"
+            >
+          </label>
+
+          <label class="setting-row setting-row-input" for="autoSaveSubfolder">
+            <div class="setting-copy">
+              <span class="setting-title">자동 저장 폴더</span>
+              <span class="setting-description">다운로드 폴더 기준 하위 경로를 입력합니다. 예: <code>ScrollCap/2026-04</code></span>
+            </div>
+            <input
+              id="autoSaveSubfolder"
+              class="setting-input"
+              type="text"
+              placeholder="ScrollCap"
+              spellcheck="false"
+              autocomplete="off"
+            >
+          </label>
+
+          <label class="setting-row" for="splitLargeExports">
+            <div class="setting-copy">
+              <span class="setting-title">20MB 이상이면 여러 파일로 나누기</span>
+              <span class="setting-description">전체 캡처나 선택 캡처 결과가 크면 세로 기준으로 분할 저장합니다.</span>
+            </div>
+            <input id="splitLargeExports" class="setting-toggle" type="checkbox">
+          </label>
+
+          <section class="shortcut-panel" aria-labelledby="shortcutPanelTitle">
+            <div class="shortcut-panel-header">
+              <div class="setting-copy">
+                <span id="shortcutPanelTitle" class="setting-title">단축키</span>
+                <span class="setting-description">기본값은 <code>Ctrl+Shift+7, 8, 9, 0</code>입니다. Chrome 단축키 페이지에서 직접 바꿀 수 있습니다.</span>
+              </div>
+              <button id="openShortcutsButton" class="secondary-button" type="button">단축키 설정 열기</button>
+            </div>
+
+            <div id="shortcutList" class="shortcut-list" aria-live="polite"></div>
+          </section>
+
+          <div class="settings-footer">
+            <p id="settingsStatus" class="settings-status">저장된 설정을 불러오는 중입니다.</p>
+            <div class="settings-actions">
+              <button id="resetButton" class="secondary-button" type="button">기본값으로 되돌리기</button>
+              <button class="primary-button" type="submit">저장</button>
+            </div>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <script type="module" src="/src/settings/main.ts"></script>
+  </body>
+</html>

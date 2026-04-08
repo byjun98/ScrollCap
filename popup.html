@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScrollCap</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="popup-shell">
+      <section class="hero" aria-label="캡처 개요">
+        <p class="eyebrow">ScrollCap</p>
+        <h1>원하는 방식으로 캡처하세요.</h1>
+        <p class="hero-copy">
+          지금 보이는 화면, 전체 스크롤, 원하는 선택 영역까지 바로 캡처하고 에디터에서 크롭과 저장까지 이어서 진행할 수 있습니다.
+        </p>
+      </section>
+
+      <section class="actions-card" aria-label="캡처 동작">
+        <button id="captureVisibleButton" class="primary-button" type="button">
+          <span class="button-title">현재 화면 캡처</span>
+          <span class="button-copy">지금 화면에 보이는 영역만 그대로 저장합니다.</span>
+        </button>
+
+        <button id="fullPageButton" class="secondary-button" type="button">
+          <span class="button-title">전체 페이지 캡처</span>
+          <span class="button-copy">페이지를 자동으로 내려가며 캡처하고 에디터에서 이어 붙입니다.</span>
+        </button>
+
+        <button id="selectionButton" class="secondary-button" type="button">
+          <span class="button-title">선택 영역 캡처</span>
+          <span class="button-copy">페이지에서 원하는 구간을 드래그해 선택하고 에디터에서 이어 붙입니다.</span>
+        </button>
+      </section>
+
+      <section class="status-card utility-card" aria-label="바로가기">
+        <button id="openLatestButton" class="secondary-button utility-button" type="button">
+          <span class="button-title">에디터로 이동</span>
+        </button>
+
+        <button id="openSettingsButton" class="secondary-button utility-button" type="button">
+          <span class="button-title">설정</span>
+        </button>
+      </section>
+    </main>
+
+    <script type="module" src="/src/popup/main.ts"></script>
+  </body>
+</html>

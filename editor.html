@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScrollCap</title>
+  <link rel="stylesheet" href="editor.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar" aria-label="에디터 탐색">
+      <div class="topbar-inner">
+        <div class="nav-brand">
+          <span class="nav-mark" aria-hidden="true"></span>
+          <span class="nav-title">ScrollCap</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero-band" aria-label="에디터 개요">
+      <div class="hero-band-inner">
+        <div class="hero-copy-block">
+          <p class="eyebrow">ScrollCap</p>
+          <h1>픽셀 단위로 확인하세요.</h1>
+          <p class="hero-description">
+            이어 붙인 결과를 바로 확인하고, 원하는 영역만 크롭한 뒤<br />
+            필요한 포맷으로 저장할 수 있습니다.
+          </p>
+        </div>
+
+        <div class="toolbar-actions">
+          <button type="button" class="toolbar-button" data-action="undo-crop" id="undoCropButton" disabled>되돌리기</button>
+          <button type="button" class="toolbar-button" data-action="redo-crop" id="redoCropButton" disabled>다시하기</button>
+          <button type="button" class="toolbar-button" data-action="crop-toggle" id="cropToggleButton" aria-pressed="false">크롭</button>
+          <button type="button" class="toolbar-button toolbar-button-primary" data-action="crop-done" id="cropDoneButton" disabled>크롭 완료</button>
+          <button type="button" class="toolbar-button toolbar-button-primary" data-action="export-png" id="exportPngButton">PNG 저장</button>
+          <button type="button" class="toolbar-button toolbar-button-primary" data-action="export-jpeg" id="exportJpegButton">JPEG 저장</button>
+          <button type="button" class="toolbar-button" data-action="clear">비우기</button>
+        </div>
+      </div>
+    </section>
+
+    <main class="workspace">
+      <aside class="sidebar" aria-label="캡처 요약">
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="panel-eyebrow">캡처 요약</p>
+              <h2>현재 화면</h2>
+            </div>
+            <span class="panel-tag">편집 중</span>
+          </div>
+
+          <dl class="summary-list">
+            <div>
+              <dt>캡처 소스</dt>
+              <dd>
+                <a id="sourceLink" class="summary-link" href="#" target="_blank" rel="noreferrer noopener">캡처 대기 중</a>
+              </dd>
+            </div>
+            <div>
+              <dt>파일 크기</dt>
+              <dd id="fileSizeValue">알 수 없음</dd>
+            </div>
+            <div>
+              <dt>크롭</dt>
+              <dd id="cropValue">전체 이미지</dd>
+            </div>
+          </dl>
+        </section>
+
+        <section class="panel panel-note">
+          <p class="panel-eyebrow">작업 흐름</p>
+          <h2>크롭, 미리보기, 저장</h2>
+          <p>
+            크롭을 완료하면 미리보기에도 바로 반영됩니다. 상단 버튼이나 `Ctrl+Z`, `Ctrl+Y`로 되돌리기와 다시하기도 가능합니다.
+          </p>
+        </section>
+      </aside>
+
+      <section class="preview" aria-label="미리보기 영역">
+        <section class="canvas-frame" aria-live="polite">
+          <div class="canvas-state canvas-state-loading" id="loadingState">
+            <div class="loading-spinner" aria-hidden="true"></div>
+            <div class="canvas-state-copy">
+              <div class="empty-state-badge">캡처 불러오는 중</div>
+              <h2>저장된 캡처를 읽는 중입니다</h2>
+              <p id="loadingMessage">IndexedDB에서 캡처 기록과 이미지 자산을 찾고, 필요하면 로컬 저장소도 함께 확인합니다.</p>
+            </div>
+            <div class="loading-progress" id="loadingProgress" hidden>
+              <div class="loading-progress-meta">
+                <span id="loadingProgressLabel">캡처 준비 중</span>
+                <span id="loadingProgressText">0%</span>
+              </div>
+              <div class="loading-progress-track" aria-hidden="true">
+                <div class="loading-progress-fill" id="loadingProgressBar"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="canvas-state canvas-state-error" id="errorState" hidden>
+            <div class="empty-state-badge empty-state-badge-error">불러오기 실패</div>
+            <h2 id="errorTitle">캡처를 불러오지 못했습니다</h2>
+            <p id="errorMessage">요청한 캡처를 찾지 못했거나 이미지 자산이 비어 있습니다.</p>
+            <button type="button" class="toolbar-button toolbar-button-primary" id="retryButton">다시 시도</button>
+          </div>
+
+          <div class="empty-state" id="emptyState" hidden>
+            <div class="empty-state-badge">캡처 없음</div>
+            <h2 id="emptyStateTitle">캡처 결과가 여기에 표시됩니다</h2>
+            <p id="emptyStateMessage">페이지를 캡처하거나 불러오면 이어 붙인 결과를 미리 보고 저장 준비를 할 수 있습니다.</p>
+          </div>
+
+          <figure class="capture-stage" id="previewStage" hidden>
+            <div class="capture-stage-shell">
+              <div class="capture-stage-viewport" id="captureViewport">
+                <div class="capture-stage-surface" id="captureSurface">
+                  <img id="captureImage" alt="불러온 스크롤 캡처 미리보기" />
+                  <div class="crop-overlay" id="cropOverlay" hidden aria-hidden="true">
+                    <div class="crop-box" id="cropBox">
+                      <span class="crop-box-label" id="cropBoxLabel">크롭</span>
+                      <span class="crop-box-dimensions" id="cropBoxDimensions"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <figcaption class="capture-caption" id="captureCaption"></figcaption>
+          </figure>
+
+          <div class="canvas-placeholder" id="canvasPlaceholder" hidden>
+            <div class="placeholder-grid" aria-hidden="true"></div>
+            <p>미리보기 플레이스홀더</p>
+          </div>
+        </section>
+
+        <div class="status-line" role="status" aria-live="polite">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="statusText">캡처 결과를 기다리는 중입니다.</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="/src/editor/main.ts"></script>
+</body>
+</html>

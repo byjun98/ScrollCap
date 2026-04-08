@@ -1,0 +1,53 @@
+{
+  "manifest_version": 3,
+  "name": "ScrollCap",
+  "version": "0.1.0",
+  "description": "현재 탭의 보이는 영역과 전체 스크롤 스크린샷을 캡처합니다.",
+  "action": {
+    "default_title": "ScrollCap",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "settings.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "downloads"
+  ],
+  "commands": {
+    "capture-visible": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+7",
+        "mac": "Command+Shift+7"
+      },
+      "description": "현재 탭의 보이는 영역 캡처"
+    },
+    "capture-full-page": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+8",
+        "mac": "Command+Shift+8"
+      },
+      "description": "현재 탭의 전체 페이지 캡처"
+    },
+    "capture-selection": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9",
+        "mac": "Command+Shift+9"
+      },
+      "description": "현재 탭의 선택 영역 캡처"
+    },
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0",
+        "mac": "Command+Shift+0"
+      }
+    }
+  }
+}
